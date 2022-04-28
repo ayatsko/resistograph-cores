@@ -14,6 +14,24 @@ drillingresistance_plot(a)
 
 # FOR TREE CORES
 df <- read.csv("/Users/abbeyyatsko/Desktop/repos/resistograph-cores/data_core/core_processing.csv")
+df$Dry_Mass <- as.numeric(df$Dry_Mass)
+str(df)
+
+# add column for segment length (need to check on these units - probably mm?)
+df$seg_length <- (df$Length_d) - (df$Length_p)
+
+# add column for segment diameter (mm)
+df$diameter <- 5
+
+# add column for volume (based on cylindrical shape)
+# V = π * r^2 * h
+df$volme <- pi * ((df$diameter/2)^2) * df$seg_length
+
+# add column for density estimate (working - need to check on all units)
+# d = m / v 
+df$density <- df$Dry_Mass / df$volme
+
+# these units are grams / mm^3 (most likely - need to check on this)
 
 # take the big data sheet and make unique df for each unique column value in 'Cores' 
 library(dplyr)
