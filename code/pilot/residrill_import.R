@@ -5,11 +5,10 @@
 # @export
 
 residrill_import <- function(filename) {
-  out<-read.table(file = filename,sep=";",skip = 129)
+  out<-read.table(file = filename,sep=";",skip = 129) 
   names(out)<-c("drilling.resistance","feed.speed")
   return(out)
 }
-
 
 # @title feedspeed_plot
 # @export
